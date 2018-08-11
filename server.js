@@ -8,17 +8,15 @@ const knex = require('knex');
 app.use(cors());
 app.use(bodyParser.json());
 
-const postgres = knex ({
+const db = knex ({
   client: 'pg',
   connection: {
     host: '127.0.0.1',
-    user : 'your_database_user',
-    password : 'your_database_password',
-    database : 'myapp_test'
+    user: 'your_username',
+    password: 'your_password',
+    database: 'your_dbname'
   }
 });
-
-console.log(postgres.select('*').from('users'));
 
 const database = {
   users: [
@@ -54,15 +52,12 @@ app.post('/signin', (req, res) => {
 })
 
 app.post('/register', (req, res) => {
-  const { name, email, password } = req.body
-  database.users.push({
-    id: '3',
+  const { name,  email, password } = req.body
+  db('users').insert({
     name: name,
     email: email,
-    //    password: password,
-    entries: 0,
     joined: new Date()
-  })
+  }).then(console.log)
   res.json(database.users[database.users.length - 1]);
 })
 
