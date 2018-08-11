@@ -3,9 +3,22 @@ const app = express();
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
+const knex = require('knex');
 
 app.use(cors());
 app.use(bodyParser.json());
+
+const postgres = knex ({
+  client: 'pg',
+  connection: {
+    host: '127.0.0.1',
+    user : 'your_database_user',
+    password : 'your_database_password',
+    database : 'myapp_test'
+  }
+});
+
+console.log(postgres.select('*').from('users'));
 
 const database = {
   users: [
