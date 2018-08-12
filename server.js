@@ -19,7 +19,6 @@ const db = knex ({
 });
 
 app.get('/', (req, res) => {
-
 })
 
 app.post('/signin', (req, res) => {
@@ -94,5 +93,5 @@ app.put('/image', (req, res) => {
 })
 
 app.listen(3000, () => {
-  console.log('app is running on port 3000');
+  console.log('App is running on port 3000');
 })
