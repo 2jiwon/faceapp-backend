@@ -12,13 +12,13 @@ const image = require('./controllers/image');
 app.use(cors());
 app.use(bodyParser.json());
 
+const PORT = process.env.PORT;
+
 const db = knex ({
   client: 'pg',
   connection: {
-    host: '127.0.0.1',
-    user: 'your_username',
-    password: 'your_password',
-    database: 'your_dbname'
+    connectionString: process.env.DATABASE_URL,
+    ssl: true
   }
 });
 
